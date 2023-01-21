@@ -1,9 +1,12 @@
 import { Component } from "react"
+
 import {Searchbar} from "./Searchbar/Searchbar"
 import {ImageGallery} from "./ImageGallery/ImageGallery"
 import {Button} from "./Button/Button"
 import {Loader} from "./Loader/Loader"
+
 import { getPixabayImages } from "services/api"
+import { Notify } from 'notiflix';
 import css from "../components/styles.css"
 
 
@@ -37,8 +40,9 @@ async componentDidUpdate(_, prevState) {
       );
 
       if (hits.length === 0) {
-        this.setState({ error: 'error', images: [] });
-        return;
+        Notify.warning('Enter correct data');
+        // this.setState({ error: 'error', images: [] });
+        // return;
       }
 
       this.setState(prevState => ({
@@ -47,9 +51,8 @@ async componentDidUpdate(_, prevState) {
         error: null,
       }));
     } catch (error) {
-      this.setState({
-        error: error,
-      });
+      this.setState({ error: error });
+        Notify.failure('ERROR');
     } finally {
       this.setState({
         isLoading: false,
