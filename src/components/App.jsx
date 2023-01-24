@@ -16,7 +16,6 @@ export class App extends Component {
     page: 1,
     query: '',
     totalHits: null,
-    largeImageURL: '',
     isLoading: false,
     error: null,
   }
